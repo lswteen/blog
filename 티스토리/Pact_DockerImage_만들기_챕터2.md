@@ -87,7 +87,7 @@ Puma는 충돌시 자동으로 재시작하지 않으므로, Pact Broker가 계�
 Passenger는 충돌한 프로세스를 재시작합니다.
 
 
-# Pact Broker Server Local 구성하기 Mac 기준 (약 10 - 20분소요)
+# Pact Broker Server Local 구성하기 Mac 기준 (약 10~20분소요)
 순서대로 진행하시면 Local PC에서 docker-compose.yaml을 최종적으로 실행시킨후   
 http://localhost:9292 Pact Broker Server WEB UI 까지 확인 가능 합니다. 
 
