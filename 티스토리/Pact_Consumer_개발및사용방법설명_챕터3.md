@@ -13,9 +13,12 @@ Pact Contract(.JSON) 파일을 만드는 방법은 Consumer(소비자) 에서 �
 우선 각 개발 언어별 Pact 라이브러리를 사용해서 개발진행하게되는데 이번내용에서는 2가지 언어로 작업에정입니다
 
 ## Pact 개념
-https://martinfowler.com/articles/consumerDrivenContracts.html
-
+https://martinfowler.com/articles/consumerDrivenContracts.html  
 소비자 주도 계약 이라는 개념에서 시작하였고 자세한 사항은 해당 페이지를 참고하세요!!
+
+[Pact 챕터1 MSA아키텍처 API 자동화 테스트 Contract Test Pact 오픈라이브러리 알아보기](https://angryfullstack.tistory.com/111)
+
+
 
 ## Pact JVM
 공식문서에서 튜토리얼(60분)  
@@ -35,6 +38,18 @@ step 8: Authorization
 step 9: Implement authorisation on the provider  
 step 10: Request Filters on the Provider  
 step 11: Using a Pact Broker  
+
+```text
+공식문서에서 제공하고있는 JVM 워크스테이션은 Pact Contract Test를 진행할수 있는 11단계의 플로우를 공유하고있고
+step7 번까지 진행하면 인증테스트를 제외한 기본적인 Rest API 테스트 코드를 직간접적으로 확인이 가능합니다.
+
+step8에는 SpringSecurity 에서 인증을 제공하는 Header 영역에 Authorization 체크하는 부분을 추가하여
+Contract Test 하는 기능을 제공합니다.
+
+기본 API테스트까지 필요하신분들은 step7까지 진행하시고 
+회원정보, 권한등 인증에대한 API검증도 진행하시려면 step11까지 테스트해보시는것을 권장드립니다. 
+```
+
 
 ### 작업전 확인사항
 ```text
