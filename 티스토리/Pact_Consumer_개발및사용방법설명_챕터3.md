@@ -19,7 +19,6 @@ https://martinfowler.com/articles/consumerDrivenContracts.html
 [Pact 챕터1 MSA아키텍처 API 자동화 테스트 Contract Test Pact 오픈라이브러리 알아보기](https://angryfullstack.tistory.com/111)
 
 
-
 ## Pact JVM
 공식문서에서 튜토리얼(60분)  
 Springboot 진행할수 있는 어플리케이션 워크샵을 제공하고있습니다.  
@@ -49,7 +48,6 @@ Contract Test 하는 기능을 제공합니다.
 기본 API테스트까지 필요하신분들은 step7까지 진행하시고 
 회원정보, 권한등 인증에대한 API검증도 진행하시려면 step11까지 테스트해보시는것을 권장드립니다. 
 ```
-
 
 ### 작업전 확인사항
 ```text
@@ -117,13 +115,314 @@ au.com.dius.pact.core:matchers
 au.com.dius.pact.core:pactbroker
 ```
 
-## Pact JS
-코로나확인 으로 몸저누움
-### Consumer Unit Test 및 Pact DSL(.Json) 파일생성
+---
 
-#### Step1
+## API Consumer Unit Test 및 Pact DSL(.Json) 파일생성
+아래 github는 Pact에서 제공하는 기본 예제샘플을 기반으로 테스트 용이하게   
+추가하거나 수정하였습니다.
+
+샘플 github : https://github.com/lswteen/pact-workshop-jvm-spring
+
+### Step1
 Pact 에서 제공하는 워크샵을 시작하게되면 우선 git clone 진행이 필요합니다.
-
 consumer, product 2개의 실행 가능한 Multi Moudle이 존재합니다.
 
+아래링크로 이동한뒤 git clone 하시거나 git Fork 떠서 본인 github저장소로 옮기셔도됩니다.
+여기서 main만이동되기에 필요한 step branch가 필요하다면 fork말고 git clone하셔도됩니다.
+
+https://github.com/pact-foundation/pact-workshop-jvm-spring
+
+```shell
+> git clone https://github.com/pact-foundation/pact-workshop-jvm-spring
+```
+
+### Step2
+pact-workshop-jvm-spring Repository에 main branch 구조를 살펴보면 아래와같습니다.
+```text
+- consumer
+- diagrams
+- gradle/wrapper
+- provider
+.gitignore
+LICENSE
+README.md
+build.gradle
+docker-compose.yaml
+gradlew
+gradlew.bat
+settings.gradle
+```
+docker-compose.yaml 파일에 작성된 docker 컨테이너를 기동해야합니다.  
+아래 링크를 참고하세요!
+
+[docker-compose 구동방법](https://angryfullstack.tistory.com/115)
+
+pact-workshop-jvm-spring 에서 제공하는 docker-compose.yaml 파일을 가볍게 살펴보면..
+```yaml
+version: "3"                                      //버전 정보
+
+services:
+  postgres:
+    image: postgres                               //이미지명 
+    healthcheck:
+      test: psql postgres --command "select 1" -U postgres
+    ports:
+      - "5432:5432"                               //기본 PORT
+    volumes:
+      - data:/var/lib/postgresql/data             //디스크 초기화로인한 별도의 mount db
+    environment:
+      POSTGRES_USER: postgres                     //USER 재 정의 필요 
+      POSTGRES_PASSWORD: password                 //PASSWORD 재 정의 필요
+      POSTGRES_DB: postgres
+
+  broker_app:
+    image: pactfoundation/pact-broker             //이미지명
+    platform: linux/amd64                         //OS 선택
+    links:
+      - postgres
+    ports:
+      - 9292:9292                                 //기본 PORT
+    environment:
+      PACT_BROKER_PORT: '9292'
+      PACT_BROKER_LOG_LEVEL: INFO                 //서버 로그레벨
+      PACT_BROKER_SQL_LOG_LEVEL: DEBUG            //SQL 로그레벨
+      PACT_BROKER_BASIC_AUTH_USERNAME: jobkorea   //USER 재 정의 필요
+      PACT_BROKER_BASIC_AUTH_PASSWORD: 1111       //PASSWORD 재 정의 필요
+      PACT_BROKER_DATABASE_USERNAME: postgres
+      PACT_BROKER_DATABASE_PASSWORD: password
+      PACT_BROKER_DATABASE_HOST: postgres
+      PACT_BROKER_DATABASE_NAME: postgres
+volumes:
+  data: {}
+```
+
+### Step3
+Unit Test 검증 및 .Json PACT파일 생성  
+테스트 코드에는 여러건의 Controller API를 검증하게 구성되어있습니다.
+
+일단 임의로 Controller 에서 제공하는 API 1건을 테스트코드로 직접 구현 해보도록 하겠습니다.
+코드는 /products API에 대한 Pact Contract Test를 위한 Unit 코드입니다.
+
+아래 코드가 정상적으로 Success가 떨어지면 
+```groovy
+
+..코드생략
+
+task copyPacts(type: Copy) {
+	description 'Copies the generated Pact json file to the provider resources directory'
+
+	from('build/pacts/')
+	into('../provider/src/test/resources/pacts/')
+}
+
+..코드생략
+
+```
+pact-workshop-jvm-spring > consumer 멀티모듈 build.gradle파일에 정의된 설정정보   
+Pact파일이 생성됩니다.
+
+
+
+```java
+package au.com.dius.pactworkshop.consumer;
+
+import au.com.dius.pact.consumer.MockServer;
+import au.com.dius.pact.consumer.dsl.PactDslWithProvider;
+import au.com.dius.pact.consumer.junit5.PactConsumerTestExt;
+import au.com.dius.pact.consumer.junit5.PactTestFor;
+import au.com.dius.pact.core.model.RequestResponsePact;
+import au.com.dius.pact.core.model.annotations.Pact;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static io.pactfoundation.consumer.dsl.LambdaDsl.newJsonArrayMinLike;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+@ExtendWith(PactConsumerTestExt.class)
+public class ProductConsumerPactOneTest {
+
+    //해더영역 UTF-8 설정
+    private Map<String, String> headers() {
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Content-Type", "application/json; charset=utf-8");
+        return headers;
+    }
+
+    //consumer, provider 명칭은 Pact broker server에서 식별자로 사용됨
+    //
+    @Pact(consumer = "FrontendOneApplication", provider = "ProductOneService")
+    RequestResponsePact getAllProducts(PactDslWithProvider builder) {
+        return builder.given("products exist")      //given value 식별자로 사용
+                .uponReceiving("get all products")
+                .method("GET")
+                .path("/products")
+                .matchHeader("Authorization", "Bearer (19|20)\\d\\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][1-9]|2[0123]):[0-5][0-9]")
+                .willRespondWith()
+                .status(200)
+                .headers(headers())
+                .body(newJsonArrayMinLike(1, array ->
+                    array.object(object -> {
+                        object.stringType("id", "09");
+                        object.stringType("type", "CREDIT_CARD");
+                        object.stringType("name", "Gem Visa");
+                        object.stringType("version","v1");
+                    })
+                ).build())
+                .toPact();
+    }
+
+    
+    @Test
+    @PactTestFor(pactMethod = "getAllProducts")     //@Pact 선언된 method와 동일한 이름
+    void getAllProducts_whenProductsExist(MockServer mockServer) {
+        Product product1 = new Product();
+        product1.setId("09");
+        product1.setType("CREDIT_CARD");
+        product1.setName("Gem Visa");
+        product1.setVersion("v1");
+
+        List<Product> expected = Arrays.asList(product1);
+
+        RestTemplate restTemplate = new RestTemplateBuilder()
+                .rootUri(mockServer.getUrl())
+                .build();
+        List<Product> products = new ProductService(restTemplate).getAllProducts();
+
+        assertEquals(expected, products);
+    }
+}
+
+```
+
+아래코드가 정상적으로 성공하면 .Json PACT파일이 생성됩니다.  
+>./gradlew consumer:test
+```shell
+(base) renzo@MI-1-renzo1980 pact-workshop-jvm-spring % ./gradlew consumer:test
+Starting a Gradle Daemon (subsequent builds will be faster)
+
+BUILD SUCCESSFUL in 13s
+4 actionable tasks: 4 up-to-date
+<-------------> 0% WAITING
+> IDLE
+(base) renzo@MI-1-renzo1980 pact-workshop-jvm-spring % 
+
+```
+pact-workshop-jvm-spring > consumer > pacts 
+
+FrontendOneApplication-ProductOneService.json
+```json
+{
+  "provider": {
+    "name": "ProductOneService"
+  },
+  "consumer": {
+    "name": "FrontendOneApplication"
+  },
+  "interactions": [
+    {
+      "description": "get all products",
+      "request": {
+        "method": "GET",
+        "path": "/products",
+        "headers": {
+          "Authorization": "Bearer 1957-08-21T20:33"
+        },
+        "matchingRules": {
+          "header": {
+            "Authorization": {
+              "matchers": [
+                {
+                  "match": "regex",
+                  "regex": "Bearer (19|20)\\d\\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][1-9]|2[0123]):[0-5][0-9]"
+                }
+              ],
+              "combine": "AND"
+            }
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": [
+          {
+            "name": "Gem Visa",
+            "id": "09",
+            "type": "CREDIT_CARD",
+            "version": "v1"
+          }
+        ],
+        "matchingRules": {
+          "body": {
+            "$": {
+              "matchers": [
+                {
+                  "match": "type",
+                  "min": 1
+                }
+              ],
+              "combine": "AND"
+            },
+            "$[*].id": {
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ],
+              "combine": "AND"
+            },
+            "$[*].type": {
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ],
+              "combine": "AND"
+            },
+            "$[*].name": {
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ],
+              "combine": "AND"
+            },
+            "$[*].version": {
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ],
+              "combine": "AND"
+            }
+          }
+        }
+      },
+      "providerStates": [
+        {
+          "name": "products exist"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "3.0.0"
+    },
+    "pact-jvm": {
+      "version": "4.1.7"
+    }
+  }
+}
+
+```
 
