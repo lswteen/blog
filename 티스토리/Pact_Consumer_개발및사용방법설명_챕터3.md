@@ -312,8 +312,10 @@ BUILD SUCCESSFUL in 13s
 <-------------> 0% WAITING
 > IDLE
 (base) renzo@MI-1-renzo1980 pact-workshop-jvm-spring % 
-
 ```
+아래와같이 특정 Unit 테스트코드를 실행할떄 아래와같이 class파일명을 명시하셔도됩니다.
+> ./gradlew consumer:test --tests *PactTest
+
 pact-workshop-jvm-spring > consumer > pacts 
 
 FrontendOneApplication-ProductOneService.json
@@ -426,3 +428,31 @@ FrontendOneApplication-ProductOneService.json
 
 ```
 
+### Step4
+.Json Pact 파일이 생성되었다면 Pact Broker Server 계약 파일을 Public하면됩니다.
+관련내용은 build.gradle 확인가능합니다.
+
+pact-workshop-jvm-spring > consumer > build.gradle
+```groovy
+..
+... 생략
+
+pact {
+    publish {
+        pactDirectory = 'consumer/build/pacts'
+        pactBrokerUrl = 'http://localhost:9292/'
+        pactBrokerUsername = 'jobkorea'
+        pactBrokerPassword = '1111'
+        tags = [getGitBranch(), 'test', 'prod']
+        consumerVersion = getGitHash()
+    }
+}
+
+```
+Intellij Tool Gradle 통해서 pactPublic 진행하면됩니다.
+docker 이미지로 실행되어있는 broker-server  public 성공시
+
+http://localhost:9292/ 해당 Broker Web UI에서 등록된 API 확인이 가능합니다.
+![image](https://github.com/lswteen/blog/assets/3292892/29970b65-411d-4a9c-a661-3f75a60869f2)
+FrontendOneApplication -> ProductOneService 방향으로 Pact파일 확인
+![image](https://github.com/lswteen/blog/assets/3292892/896d3172-8f14-4d6e-8a8a-c670abeccc37)
