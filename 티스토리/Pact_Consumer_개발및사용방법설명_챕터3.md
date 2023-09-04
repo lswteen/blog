@@ -36,6 +36,79 @@ step 9: Implement authorisation on the provider
 step 10: Request Filters on the Provider  
 step 11: Using a Pact Broker  
 
+### 작업전 확인사항
+```text
+Pact Specification Version 3.0
+언어 스팩이 상이할경우 Pact 버전차이로 인해서 정상적으로 처리되지 않는삽질을 할수있기때문에 DSL구성된
+.JSON 파일에 metadata 를 꼭 확인하시기 바랍니다.
+```
+```json
+  "metadata": {
+    "pactSpecification": {
+      "version": "3.0.0"
+    },
+    "pact-jvm": {
+      "version": "4.1.7"
+    }
+  }
+```
+
+### Supported JDK and specification versions:
+
+| Branch                                                                 | Specification | JDK        | Kotlin Version | Latest Version | Notes |
+|------------------------------------------------------------------------|---------------|------------|----------------|----------------|-------|
+| [4.6.x](https://github.com/DiUS/pact-jvm/blob/v4.6.x/README.md) master | V4 + plugins  | 17+        | 1.8.22         | 4.6.2          |       |
+| [4.5.x](https://github.com/DiUS/pact-jvm/blob/v4.5.x/README.md)        | V4 + plugins  | 11+/17+(1) | 1.7.20         | 4.5.8          |       |
+| [4.1.x](https://github.com/DiUS/pact-jvm/blob/v4.1.x/README.md)        | V3            | 8-12       | 1.3.72         | 4.1.42         |       |
+
+
+### Previous versions (not actively supported)
+
+| Branch                                                                    | Specification | JDK       | Kotlin Version | Scala Versions | Latest Version |
+|---------------------------------------------------------------------------|---------------|-----------|----------------|----------------|----------------|
+| [4.4.x](https://github.com/DiUS/pact-jvm/blob/v4.4.x/README.md)           | V4 + plugins  | 11+       | 1.6.21         | N/A            | 4.4.9          |
+| [4.3.x](https://github.com/DiUS/pact-jvm/blob/v4.3.x/README.md)           | V4            | 11+       | 1.6.21         | N/A            | 4.3.19         |
+| [4.2.x](https://github.com/DiUS/pact-jvm/blob/v4.2.x/README.md)           | V4 (1)        | 11-15 (2) | 1.4.32         | N/A            | 4.2.21         |
+| [4.0.x](https://github.com/DiUS/pact-jvm/blob/v4.x/README.md)             | V3            | 8-12      | 1.3.71         | N/A            | 4.0.10         |
+| [3.6.x](https://github.com/DiUS/pact-jvm/blob/v3.6.x/README.md)           | V3            | 8         | 1.3.71         | 2.12           | 3.6.15         |
+| [3.5.x](https://github.com/DiUS/pact-jvm/blob/v3.5.x/README.md)           | V3            | 8         | 1.1.4-2        | 2.12, 2.11     | 3.5.25         |
+| [3.5.x-jre7](https://github.com/DiUS/pact-jvm/blob/v3.5.x-jre7/README.md) | V3            | 7         | 1.1.4-2        | 2.11           | 3.5.7-jre7.0   |
+| [2.4.x](https://github.com/DiUS/pact-jvm/blob/v2.x/README.md)             | V2            | 6         | N/A            | 2.10, 2.11     | 2.4.20         |
+
+### Pact 라이브러리 패키지 구조
+```
+au.com.dius.pact:consumer
+au.com.dius.pact.consumer:groovy
+au.com.dius.pact.consumer:junit
+au.com.dius.pact.consumer:junit5
+au.com.dius.pact.consumer:java8
+au.com.dius.pact.consumer:specs2_2.13
+au.com.dius.pact:pact-jvm-server
+au.com.dius.pact:provider
+au.com.dius.pact.provider:scalatest_2.13
+au.com.dius.pact.provider:spring
+au.com.dius.pact.provider:maven
+au.com.dius.pact:provider
+au.com.dius.pact.provider:junit
+au.com.dius.pact.provider:junit5
+au.com.dius.pact.provider:scalasupport_2.13
+au.com.dius.pact.provider:lein
+au.com.dius.pact.provider:gradle
+au.com.dius.pact.provider:specs2_2.13
+au.com.dius.pact.provider:junit5spring
+au.com.dius.pact.core:support
+au.com.dius.pact.core:model
+au.com.dius.pact.core:matchers
+au.com.dius.pact.core:pactbroker
+```
 
 ## Pact JS
 코로나확인 으로 몸저누움
+### Consumer Unit Test 및 Pact DSL(.Json) 파일생성
+
+#### Step1
+Pact 에서 제공하는 워크샵을 시작하게되면 우선 git clone 진행이 필요합니다.
+
+consumer, product 2개의 실행 가능한 Multi Moudle이 존재합니다.
+
+
