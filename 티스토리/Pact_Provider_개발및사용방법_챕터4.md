@@ -3,7 +3,6 @@ title: "MSA 아키텍처 API 자동화 Pact Provider Unit 테스트 코드 개�
 date: 2023-09-08
 ---
 
-
 # Pact 개념
 
 [소비자 주도 계약 이라는 개념에서 시작하였고 자세한 사항은 해당 페이지를 참고하세요!!](https://martinfowler.com/articles/consumerDrivenContracts.html)
@@ -35,7 +34,7 @@ Consumer : FrontendOneApplication
 Provider : ProductOneService  
 Given : products exist
 ---
-
+![img_1.png](img_1.png)
 ## Pact Broker Server 
 ```text
 Pact Broker는 Pact Contract Testing 프로세스에서 중요한 역할을 하는 중앙 저장소입니다.
@@ -118,7 +117,6 @@ public class ProductPactOneProviderTest {
         }
     }
 
-
     @State("products exist")
     void toProductsExistState() {
         List<Product> response = Arrays.asList(
@@ -128,10 +126,27 @@ public class ProductPactOneProviderTest {
 
         when(productRepository.fetchAll()).thenReturn(response);
 
-
     }
 }
 
 ```
 
+## Provider Test 실행
+```shell
+"./gradlew provider:test --tests ProductPactOneProviderTest"
 
+(base) renzo@MI-1-renzo1980 pact-workshop-jvm-spring % ./gradlew provider:test --tests ProductPactOneProviderTest
+
+> Task :provider:test
+16:24:23.852 [SpringContextShutdownHook] DEBUG org.springframework.context.support.GenericApplicationContext - Closing org.springframework.context.support.GenericApplicationContext@2f965b1, started on Fri Sep 08 16:24:22 KST 2023
+
+BUILD SUCCESSFUL in 8s
+5 actionable tasks: 1 executed, 4 up-to-date
+(base) renzo@MI-1-renzo1980 pact-workshop-jvm-spring % 
+
+```
+![img_2.png](img_2.png)
+정상적으로 Unit테스트가 성공하면 이미지처럼 Contract Test 검증된것을 확인할수 있습니다. 
+
+관련 내용은 [Github](https://github.com/lswteen/pact-workshop-jvm-spring)
+에서 확인이 가능합니다.
