@@ -1,15 +1,21 @@
-#SEO
+#Search Engine Optimization (검색 엔진 최적화)
 
 SEO는 Google, Naver, Youtube, SNS 등 서비스 플랫폼에서 제공되고있는 검색엔진에 노출하고자 하는  
 서비스 플랫폼, 블로그, 이커머스, 컨텐츠 등등등.. 랭킹을 올릴수 있는 다양한 방법을 최적화 하는 프로세스 입니다.
 
-## 다양한 서비스플랫폼 SEO를 3-4 년째 삽질하며 느낀 내용을 기반으로 정리 합니다.
+## 검색최적화 키워드 SEO, SEM, PPC
+- SEO : 검색 엔진에서 유기적인 트래픽 유도
+- SEM : 검색 엔진에서 유기적, 유료 트래픽 유도
+- PPC : 
+
+## 다양한 서비스 플랫폼 SEO를 3-4 년째 삽질하며 느낀 내용을 기반으로 정리 합니다.
 유튜브, 블로그, 전자책, 오픈마켓 등으로 어떻게하면 노출을 증가시키고 클릭을 유도하고 
 타케팅으로 유도된 EndUser들이 내가 만든 컨텐츠에 지속시간이 증가되고 각 서비스 플랫폼에서 랭킹이 상위로 올라갈수있는 
-행위를 여러 작은성공 실패등으로 느껴보던 내용 입니다.
+행위 여러 작은 성공 실패등으로 느껴보던 내용을 정리해보는 시간이 필요한것 같아서 기록합니다.
 
 - [구글 검색엔진 최적화](https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=ko)
 - [네이버 검색엔진 최적화](https://searchadvisor.naver.com/guide/seo-basic-intro)
+- [유투브 컨텐츠 최적화](https://www.youtube.com/@youtubecreators)  
 
 ## youtube 컨텐츠 랭킹 상위 노출 
 ![img_4.png](img_4.png)
