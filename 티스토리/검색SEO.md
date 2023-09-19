@@ -109,7 +109,15 @@ Call to action 있는 랜딩 페이지 하나만 관리하고 싶으면 서브�
 - https://www.screamingfrog.co.uk/seo-spider/
 
 
+### 화이트햇 방식
 
+
+### 블랙햇 방식
+
+
+### META 태그 속성 정의
+
+### 베스트 프렉티스 SEO 태그 정의 샘플
 
 
 
