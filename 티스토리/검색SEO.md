@@ -185,5 +185,341 @@ https://the-edit.co.kr/55557
 
 
 
+### HTML5 SEO 요소
 
+#### <title>
+각 페이지의 제목을 정의하는 데 사용됩니다.
+페이지 제목은 검색 결과에서 표시되며, 페이지 콘텐츠의 핵심 키워드를 포함해야 합니다.
+```html
+<head>
+  <title>페이지 제목</title>
+</head>
 
+```
+#### <meta>
+<meta> 요소를 사용하여 페이지의 메타 정보를 정의할 수 있습니다.
+<meta name="description">은 페이지에 대한 간단한 설명을 제공하며 검색 결과에 표시됩니다.
+<meta name="keywords">는 페이지의 주요 키워드나 태그를 정의합니다.
+
+```html
+<head>
+  <meta name="description" content="페이지에 대한 간단한 설명">
+  <meta name="keywords" content="키워드1, 키워드2, 키워드3">
+</head>
+```
+
+#### <h1>~<h6>
+제목(헤딩) 요소는 페이지의 구조를 나타내는 중요한 역할을 합니다.
+<h1>은 가장 중요한 제목을 나타내며, 하위 섹션의 제목은 <h2>에서 <h6>까지 사용합니다.
+
+```html
+<h1>제목 1</h1>
+<h2>제목 2</h2>
+<h3>제목 3</h3>
+<!-- ... -->
+<h6>제목 6</h6>
+
+```
+
+#### <img>
+이미지를 포함하는 경우, <img> 요소의 alt 속성을 사용하여 이미지에 대한 설명을 제공해야 합니다.
+검색 엔진은 이미지 설명을 이용하여 이미지 검색 결과를 향상시킬 수 있습니다.
+
+```html
+<img src="이미지경로.jpg" alt="이미지 설명">
+
+```
+
+#### <a>
+하이퍼링크(<a>) 요소는 다른 페이지로 연결하는 데 사용됩니다.
+링크 텍스트를 잘 정의하고, 관련된 페이지로 연결하여 사용자와 검색 엔진이 내용을 이해하기 쉽게 만듭니다.
+
+```html
+<a href="링크URL">링크 텍스트</a>
+```
+
+#### <header>와 <footer>
+<header>와 <footer> 요소는 페이지 상단과 하단에 위치하며, 페이지의 주요 콘텐츠를 감싸는 역할을 합니다.
+검색 엔진은 이러한 요소를 사용하여 페이지의 구조를 이해하고 콘텐츠의 중요성을 파악할 수 있습니다.
+
+```html
+<header>
+  <!-- 헤더 내용 -->
+</header>
+
+<!-- 페이지 내용 -->
+
+<footer>
+  <!-- 푸터 내용 -->
+</footer>
+
+```
+
+#### <nav>
+<nav> 요소는 사이트 내비게이션 메뉴를 정의하는 데 사용됩니다.
+이것은 검색 엔진이 사이트 내의 중요한 링크와 섹션을 식별하는 데 도움이 됩니다.
+
+```html
+<nav>
+  <ul>
+    <li><a href="/">홈</a></li>
+    <li><a href="/페이지1">페이지1</a></li>
+    <li><a href="/페이지2">페이지2</a></li>
+    <!-- ... -->
+  </ul>
+</nav>
+```
+
+### Canonical
+Canonical 태그 또는 rel="canonical"은 검색 엔진 최적화 (SEO)에서 중요한 역할을 하는 HTML 요소입니다.  
+이 태그는 중복 컨텐츠의 문제를 해결하고 검색 엔진에게 어떤 페이지가 원본(주요) 페이지임을 알려주는 역할을 합니다.   
+Canonical 태그가 하는 역할은 다음과 같습니다:  
+
+중복 컨텐츠 해결: 
+웹 사이트에서 동일한 또는 거의 동일한 콘텐츠가 여러 페이지에 나타날 수 있습니다. 
+예를 들어, 제품 카탈로그 페이지의 정렬 순서가 바뀐 버전, 페이징된 페이지, 
+모바일 버전 등이 있을 수 있습니다. 이렇게 중복된 페이지는 검색 엔진에게 혼란을 줄 수 있고, 
+페이지 랭킹에 부정적인 영향을 미칠 수 있습니다.
+
+주요 페이지 지정: 
+Canonical 태그를 사용하면 여러 중복 페이지 중에서 어떤 페이지가 원본(주요) 페이지로 간주되어야 하는지를 지정할 수 있습니다.
+검색 엔진은 이 정보를 활용하여 주요 페이지를 인식하고 인덱싱합니다.
+
+검색 엔진 랭킹 향상:
+중복 컨텐츠 문제를 해결하고 주요 페이지를 지정함으로써 검색 엔진 랭킹을 향상시킬 수 있습니다. 
+중복된 페이지가 서로 경쟁하지 않고, 주요 페이지로 집중되기 때문입니다.
+
+```html
+<link rel="canonical" href="https://example.com/주요-페이지">
+
+```
+이것은 https://example.com/주요-페이지가 주요 페이지이며, 다른 중복 페이지들은 이 페이지를 따르라는 것을 나타냅니다.
+
+주의해야 할 점:
+
+Canonical 태그는 주요 페이지와 중복 페이지 간의 관계를 정확하게 나타내야 합니다.
+Canonical 태그는 주요 페이지의 <head> 섹션에 위치해야 합니다.
+중복 페이지가 정말로 동일한 내용을 가지는지 확인해야 합니다. 서로 다른 콘텐츠를 가진 경우, Canonical 태그를 사용하면 안 됩니다.
+중복 페이지를 완전히 제거하거나 로봇 메타 태그로 크롤링을 방지하는 것이 더 나은 해결책일 수 있습니다.
+Canonical 태그는 검색 엔진 최적화에 중요한 역할을 하며, 중복 컨텐츠 관리와 웹 사이트의 랭킹 향상을 위해 주로 사용됩니다.
+
+### robots
+robots.txt 파일은 검색 엔진 최적화 (SEO)에서 중요한 역할을 하는 텍스트 파일입니다.   
+이 파일은 웹 사이트의 루트 디렉터리에 위치하며, 검색 엔진 크롤러에게 웹 페이지를 어떻게 크롤링하고 인덱싱해야 하는지 지시하는 역할을 합니다.  
+robots.txt 파일의 역할은 다음과 같습니다:  
+
+```txt
+크롤러 제어: robots.txt 파일은 웹 사이트에 대한 검색 엔진 크롤러의 접근 권한을 제어하는 데 사용됩니다.
+ 이 파일을 사용하면 특정 디렉터리 또는 페이지를 크롤링하지 않도록 크롤러에 지시할 수 있습니다.
+
+중요한 페이지 강조: 웹 사이트의 중요한 페이지를 크롤러에게 강조하고 우선적으로 크롤링하도록 지시할 수 있습니다. 
+이는 검색 엔진에서 중요한 콘텐츠를 더 빠르게 인덱싱하고 랭킹에 반영하는 데 도움을 줍니다.
+
+보안 및 개인 정보 보호: robots.txt 파일을 사용하여 개인 정보가 포함된 페이지나 보안에 민감한 페이지를 크롤링하지 않도록 설정할 수 있습니다.
+
+불필요한 크롤링 방지: 검색 엔진 크롤러가 불필요하게 중복되거나 무의미한 페이지를 크롤링하지 않도록 설정할 수 있습니다. 
+이로써 웹 사이트의 대역폭을 절약하고 리소스를 효율적으로 활용할 수 있습니다.
+
+부적절한 콘텐츠 숨김: robots.txt 파일을 사용하여 부적절한 콘텐츠가 포함된 페이지를 검색 엔진 크롤러로부터 숨길 수 있습니다.
+
+robots.txt 파일은 웹 사이트의 루트 디렉터리에 위치해야 하며, 특정 크롤러에 대한 지시를 설정하는 방법은 다음과 같습니다:
+
+User-agent: 크롤러의 이름이나 식별자를 지정합니다. 
+예를 들어, Googlebot, Bingbot, 또는 * (와일드카드) 등을 사용할 수 있습니다.
+Disallow: 특정 디렉터리나 페이지를 크롤링에서 제외할 때 사용합니다.
+Allow: Disallow와 함께 사용하여 특정 디렉터리나 페이지를 제외하되 예외적으로 크롤링을 허용할 때 사용합니다.
+Sitemap: 웹 사이트의 사이트맵 파일의 경로를 지정하여 검색 엔진에게 사이트맵을 제공할 수 있습니다.
+```
+
+예를 들어, 다음은 모든 크롤러에 대해  
+/private/ 디렉터리를 크롤링하지 말라고 지시하는 robots.txt 파일의 내용입니다:
+
+```html
+User-agent: *
+Disallow: /private/
+
+```
+
+### meta 태그 설명
+
+```html
+<meta property="og:url" content="https://www.inflearn.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="인프런 - 라이프타임 커리어 플랫폼">
+<meta property="og:description" content="프로그래밍, 인공지능, 데이터, 마케팅, 디자인, 엑셀 실무 등 입문부터 실전까지 업계 최고 선배들에게 배울 수 있는 곳. 우리는 성장 기회의 평등을 추구합니다.">
+<meta property="og:image" content="https://cdn.inflearn.com/assets/brand/inflearn-brand.jpg">
+<meta property="og:image:secure_url" content="https://cdn.inflearn.com/assets/brand/inflearn-brand.jpg">
+<meta property="og:site_name" content="인프런">
+<meta property="og:locale" content="ko-KR">
+```
+#### 각 태그속성 설명
+```html
+<meta property="og:url" content="https://www.inflearn.com/">
+
+이 메타 태그는 페이지의 URL을 정의합니다.
+SEO 관점에서는 페이지의 정확한 주소를 지정하여 검색 엔진과 소셜 미디어 플랫폼이 페이지를 식별하고 적절하게 색인화할 수 있도록 도와줍니다.
+<meta property="og:type" content="website">
+
+이 메타 태그는 웹 페이지의 유형을 나타냅니다. "website"는 웹 사이트를 나타냅니다.
+소셜 미디어 플랫폼은 이 정보를 사용하여 페이지의 유형을 이해하고 미리보기 및 공유 시 적절한 형식으로 표시할 수 있습니다.
+<meta property="og:title" content="인프런 - 라이프타임 커리어 플랫폼">
+
+이 메타 태그는 웹 페이지의 제목을 나타냅니다.
+SEO 관점에서는 페이지의 주요 제목을 제공하여 검색 엔진과 소셜 미디어 플랫폼에서 페이지의 주제를 이해하고 사용자에게 표시할 때 유용합니다.
+<meta property="og:description" content="프로그래밍, 인공지능, 데이터, 마케팅, 디자인, 엑셀 실무 등 입문부터 실전까지 업계 최고 선배들에게 배울 수 있는 곳. 우리는 성장 기회의 평등을 추구합니다.">
+
+이 메타 태그는 웹 페이지의 간단한 설명 또는 요약을 나타냅니다.
+SEO 관점에서는 페이지의 내용을 간략하게 설명하여 검색 엔진 및 소셜 미디어에서 페이지를 검색 결과에 표시할 때 사용합니다.
+<meta property="og:image" content="https://cdn.inflearn.com/assets/brand/inflearn-brand.jpg">
+
+이 메타 태그는 웹 페이지와 관련된 이미지의 URL을 정의합니다.
+SEO 관점에서는 페이지와 관련된 이미지를 제공하여 소셜 미디어에서 페이지를 더 시각적으로 표시할 수 있으며, 이미지 검색 결과에 표시할 수 있습니다.
+<meta property="og:image:secure_url" content="https://cdn.inflearn.com/assets/brand/inflearn-brand.jpg">
+
+보안된 HTTPS 경로에서 이미지를 가져오도록 소셜 미디어에 지시하는 메타 태그입니다.
+<meta property="og:site_name" content="인프런">
+
+이 메타 태그는 웹 사이트의 이름을 나타냅니다.
+SEO 관점에서는 웹 사이트의 이름을 제공하여 소셜 미디어에서 웹 페이지의 출처를 인식하고 사용자에게 표시할 때 도움을 줍니다.
+<meta property="og:locale" content="ko-KR">
+
+이 메타 태그는 웹 페이지의 언어 또는 로캘을 나타냅니다.
+SEO 관점에서는 웹 페이지의 언어를 지정하여 검색 엔진과 소셜 미디어 플랫폼이 페이지를 적절하게 랭킹하고 사용자에게 표시할 때 언어를 고려할 수 있도록 도움을 줍니다.
+```
+#### 각 태그 속성 
+
+```html
+<!-- twitter og tag START  -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="인프런 - 라이프타임 커리어 플랫폼">
+<meta name="twitter:description" content="프로그래밍, 인공지능, 데이터, 마케팅, 디자인, 엑셀 실무 등 입문부터 실전까지 업계 최고 선배들에게 배울 수 있는 곳. 우리는 성장 기회의 평등을 추구합니다.">
+<meta name="twitter:image" content="https://cdn.inflearn.com/assets/brand/inflearn-brand.jpg">
+<meta name="twitter:url" content="https://www.inflearn.com/">
+<meta name="twitter:site" content="@inflearn">
+<meta name="twitter:creator" content="@inflearn">
+
+<meta name="twitter:card" content="summary">
+이 메타 태그는 Twitter 카드 유형을 정의합니다. "summary" 값은 기본적인 카드 스타일로 페이지의 제목, 설명 및 이미지를 표시합니다.
+Twitter 카드는 웹 페이지를 Twitter에서 공유할 때 해당 페이지의 미리보기를 정의합니다.
+<meta name="twitter:title" content="인프런 - 라이프타임 커리어 플랫폼">
+
+이 메타 태그는 Twitter 카드의 제목을 정의합니다.
+페이지를 Twitter에서 공유할 때, 이 제목이 미리보기에 포함됩니다.
+<meta name="twitter:description" content="프로그래밍, 인공지능, 데이터, 마케팅, 디자인, 엑셀 실무 등 입문부터 실전까지 업계 최고 선배들에게 배울 수 있는 곳. 우리는 성장 기회의 평등을 추구합니다.">
+
+이 메타 태그는 Twitter 카드의 설명을 정의합니다.
+페이지를 Twitter에서 공유할 때, 이 설명이 미리보기에 포함됩니다.
+<meta name="twitter:image" content="https://cdn.inflearn.com/assets/brand/inflearn-brand.jpg">
+
+이 메타 태그는 Twitter 카드와 함께 표시할 이미지의 URL을 지정합니다.
+페이지를 Twitter에서 공유할 때, 이 이미지가 미리보기에 표시됩니다.
+<meta name="twitter:url" content="https://www.inflearn.com/">
+
+이 메타 태그는 Twitter 카드의 웹 페이지 URL을 정의합니다.
+페이지를 Twitter에서 공유할 때, 이 URL이 공유에 포함됩니다.
+<meta name="twitter:site" content="@inflearn">
+
+이 메타 태그는 Twitter 카드를 발송한 웹 사이트 또는 앱의 Twitter 계정을 지정합니다.
+웹 페이지가 Twitter으로 공유될 때, 이 계정 정보가 표시됩니다.
+<meta name="twitter:creator" content="@inflearn">
+
+이 메타 태그는 웹 페이지를 만든 개별 사용자 또는 작성자의 Twitter 계정을 지정합니다.
+페이지가 Twitter으로 공유될 때, 이 작성자의 계정 정보가 표시됩니다.
+<!-- twitter og tag END -->
+```
+
+#### SEO head > Best Practice HTML Sample
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!DOCTYPE html>: HTML5 문서 유형을 지정합니다.
+    <html lang="en">: HTML 문서 시작을 나타냅니다. lang 속성은 페이지의 언어를 지정하는 데 사용됩니다.
+    <head>: 웹 페이지의 헤더를 시작합니다. 여기에는 문서의 메타 정보와 다른 중요한 요소들이 들어갑니다.
+    
+    <!-- 기본 SEO 메타 태그 -->
+    <title>페이지 제목</title>
+    <meta name="description" content="페이지 설명">
+    <meta name="keywords" content="키워드1, 키워드2, 키워드3">
+    <meta name="author" content="저자 이름">
+    <!--    
+    <title>: 웹 페이지의 제목을 정의합니다. 브라우저 탭에 표시되는 텍스트입니다.
+    <meta name="description" content="페이지 설명">: 웹 페이지의 간단한 설명을 정의합니다. 검색 결과 페이지에 표시됩니다.
+    <meta name="keywords" content="키워드1, 키워드2, 키워드3">: 웹 페이지와 관련된 키워드를 정의합니다. 검색 엔진에는 큰 영향을 주지 않으나, 메타 키워드로서 사용될 수 있습니다.
+    <meta name="author" content="저자 이름">: 웹 페이지의 저자 또는 작성자를 나타냅니다.
+    -->
+        
+    <!-- 검색 엔진에 대한 페이지 색인화 관련 메타 태그 -->
+    <meta name="robots" content="index, follow"> <!-- 기본값으로 설정됨 -->
+    <meta name="googlebot" content="index, follow"> <!-- 구글 검색 엔진 색인화 관련 메타 태그 -->
+
+    <!--    
+    <meta name="robots" content="index, follow">
+        : 검색 엔진 크롤러에게 페이지를 색인화하고 따르도록 지시합니다. 기본값으로 설정되어 있어서 보통 추가할 필요는 없습니다.
+        
+    <meta name="googlebot" content="index, follow">
+        : 구글 검색 엔진 크롤러에게 페이지를 색인화하고 따르도록 지시합니다.
+    -->    
+    
+    <!-- 소셜 미디어 공유 관련 메타 태그 -->
+    <!-- 페이스북 -->
+    <meta property="og:url" content="https://www.example.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="페이지 제목">
+    <meta property="og:description" content="페이지 설명">
+    <meta property="og:image" content="https://www.example.com/images/thumbnail.jpg">
+    <meta property="og:image:secure_url" content="https://www.example.com/images/thumbnail.jpg">
+    <meta property="og:site_name" content="사이트 이름">
+    <meta property="og:locale" content="ko_KR">
+    
+    <!--    
+    공유되는 컨텐츠를 블로그에 URI 주소 붙여넣으면 만들어지게되는 이미지 썸네일 및 내용     
+    이 부분은 Facebook의 Open Graph Protocol 메타 태그입니다. 페이지가 Facebook에서 공유될 때 사용됩니다. 각 속성은 다음을 나타냅니다:
+    og:url: 페이지의 URL
+    og:type: 페이지의 유형 (일반적으로 "website")
+    og:title: 페이지 제목
+    og:description: 페이지 설명
+    og:image: 페이지와 관련된 이미지의 URL
+    og:image:secure_url: 이미지의 보안된 HTTPS 경로
+    og:site_name: 사이트 이름
+    og:locale: 페이지 언어 및 로캘  
+    -->    
+        
+    <!-- 트위터 -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="페이지 제목">
+    <meta name="twitter:description" content="페이지 설명">
+    <meta name="twitter:image" content="https://www.example.com/images/thumbnail.jpg">
+    <meta name="twitter:url" content="https://www.example.com/">
+    <meta name="twitter:site" content="@사이트_트위터_계정">
+    <meta name="twitter:creator" content="@작성자_트위터_계정">
+
+    <!--    
+    이 부분은 Twitter 카드 관련 메타 태그입니다. 페이지가 Twitter에서 공유될 때 사용됩니다. 각 속성은 다음을 나타냅니다:
+    twitter:card: Twitter 카드 유형 (예: "summary_large_image"는 큰 이미지 카드)
+    twitter:title: 페이지 제목
+    twitter:description: 페이지 설명
+    twitter:image: 페이지와 관련된 이미지의 URL
+    twitter:url: 페이지의 URL
+    twitter:site: 사이트의 Twitter 계정
+    twitter:creator: 페이지의 작성자 또는 저자의 Twitter 계정  
+    -->    
+        
+    <!-- 틱톡 -->
+    <!-- 틱톡은 메타 태그를 지원하지 않을 수 있습니다. -->
+    
+    <!-- 기타 소셜 미디어 플랫폼에 필요한 메타 태그를 추가할 수 있습니다. -->
+    
+    <!-- 기타 필요한 스타일 시트, 스크립트 등의 요소를 포함할 수 있습니다. -->
+</head>
+<body>
+    <!-- 웹 페이지 본문 내용 -->
+</body>
+</html>
+
+```
