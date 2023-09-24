@@ -70,6 +70,17 @@ Youtbue 같은경우 가장 중요한 SEO항목은
 ![img_10.png](img_10.png)
 ![img_11.png](img_11.png)
 
+## NAVER 오픈마켓 쇼핑몰
+```text
+레드 오션 불모지 네이버 오픈마켓에서 경쟁이 되는
+상품을 찾고 키워드를 분석하고 분석된 키워드로 다시 타켓을 찾아가는 반복되는 행위로 
+네이버 SEO가 어떻게 돌아가는지 알수있던 경험입니다
+```
+![스크린샷 2023-09-24 오후 6 55 22](https://github.com/lswteen/blog/assets/3292892/40d89eb2-98a2-40ed-9ca9-6fb8365103f8)
+![스크린샷 2023-09-24 오후 6 57 02](https://github.com/lswteen/blog/assets/3292892/0e2b9433-23be-4863-919b-aed075c0ab34)
+![스크린샷 2023-09-24 오후 6 57 42](https://github.com/lswteen/blog/assets/3292892/85be9a21-2af5-4239-a318-d85e8c8733bb)
+
+
 ##검색엔진 최적화(SEO) 기본 가이드
 
 참조 링크 : https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=ko
