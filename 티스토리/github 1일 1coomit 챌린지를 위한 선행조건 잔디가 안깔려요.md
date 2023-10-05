@@ -42,7 +42,6 @@ Name : leesoonwoo
 Public email : lswteen@gmail.com
 
 
-
 터미널에서 아래 명령어 입력
 
 
