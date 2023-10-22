@@ -5,6 +5,10 @@ date: 2023-09-08
 
 #ELK 설치 8.9.1
 
+#Docker Compose 
+설치 주의사항
+volume 데이터를 꼭 삭제해야 정상적으로 설치가 가능함.
+
 
 #Docker Compose
 https://github.com/lswteen/docker-elk
