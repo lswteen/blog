@@ -9,6 +9,13 @@ date: 2023-09-08
 설치 주의사항
 volume 데이터를 꼭 삭제해야 정상적으로 설치가 가능함.
 
+docker 명령어 확인필요
+docker 삭제 
+container 삭제
+volume 삭제 
+
+각 명령어 정리 필요
+
 
 #Docker Compose
 https://github.com/lswteen/docker-elk
